@@ -25,15 +25,11 @@ load_dotenv()
 
 app = FastAPI(title="ELYXIR API", version="1.1.0")
 
-# Enable CORS for the frontend development server
+# Enable CORS for frontend development & production deployments
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-        "http://127.0.0.1:5173", "http://localhost:5173",
-        "http://127.0.0.1:5174", "http://localhost:5174",
-        "http://127.0.0.1:8000", "http://localhost:8000",
-        "http://127.0.0.1:8001", "http://localhost:8001",
-    ],
+    allow_origin_regex=r"https?://.*",
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
